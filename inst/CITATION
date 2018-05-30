@@ -1,0 +1,9 @@
+citHeader("To cite MLAT in publications, please use:")
+
+citEntry(entry = "manual",
+  author = "Paulo Cirino Ribeiro Neto",
+  title = "MLAT: Machine Learning Automated Software",
+  year = "2018",
+  note = "R package version 0.1.0",
+  textVersion = "P. C. Ribeiro Neto. MLAT: Machine Learning Automated Software. 2018"
+)
