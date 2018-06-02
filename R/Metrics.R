@@ -15,10 +15,12 @@ squareConfusionTable <- function(Y, Y_hat) {
 #' Get Metrics
 #' @description  Get all possible task names
 #' @export
-#' @param A valid task, can be 'MultClass' or 'BinClass'.
+#' @param task A character string vector, cointaning 'MultClass' or/and 'BinClass' and/or 'Regression'.
 #' @return All metrics names for that taks
 #' @examples
-#' GetPossibleTasks()
+#' GetMetrics(task = 'MultClass')
+#' GetMetrics(task = 'BinClass')
+#' GetMetrics(task = 'Regression')
 GetMetrics <- function(task){
   if(task == 'MultClass'){
     return(MultiClassMetricsNames())

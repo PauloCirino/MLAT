@@ -13,6 +13,12 @@ MLP_regression(X_train, Y_train, X_test, n_neurons, weight_decay = 0,
 \item{Y_train}{A numeric vector of classes or values of the trainning observations.}
 
 \item{X_test}{A Matrix of testing observations.}
+
+\item{n_neurons}{Number of neurons in the hidden layer.}
+
+\item{weight_decay}{Weigth decay parameter for neural network.}
+
+\item{max_iter}{Maximun number of trainning iterations.}
 }
 \value{
 predicted values

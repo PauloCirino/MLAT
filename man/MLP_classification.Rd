@@ -13,6 +13,12 @@ MLP_classification(X_train, Y_train, X_test, n_neurons, weight_decay = 0,
 \item{Y_train}{A numeric vector of classes or values of the trainning observations}
 
 \item{X_test}{A Matrix of testing observations.}
+
+\item{n_neurons}{Number of neurons in the hidden layer.}
+
+\item{weight_decay}{Weigth decay parameter for neural network.}
+
+\item{max_iter}{Maximun number of trainning iterations.}
 }
 \value{
 predicted values
@@ -21,6 +27,8 @@ predicted values
 Performs a multilayer perceptron classification
 }
 \examples{
+X <- as.matrix(cbind(runif(n = 100), runif(n = 100)))
+pos <- sample(100, 70)
 X_train <- X[pos, ]
 X_test <- X[-pos, ]
 Y_train <- as.numeric( X_train[, 1] ** 2 - X_train[, 2] > 0)

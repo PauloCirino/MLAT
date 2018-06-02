@@ -1,0 +1,200 @@
+* using log directory ‘/Users/paulocirino/Desktop/Faculdade/TCC/MLAT/..Rcheck’
+* using R version 3.4.2 (2017-09-28)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘./DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MLAT’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... WARNING
+Found the following executable files:
+  .git/objects/01/7521f7c76fb4e3eb833ffc0f19d67d5479f54e
+  .git/objects/07/7d7ea260bf5936b29180f9beac708289b644d6
+  .git/objects/0e/7b984be750c1315c5214d52a39c98e4755347a
+  .git/objects/17/2d004c3448978f91370ed5a369ad68a5ac9ed5
+  .git/objects/17/5443ce8855883fcbf0122a6bfba12ac4cfb49d
+  .git/objects/1b/619636bedf0136d6a8197f703e6aec77fe7248
+  .git/objects/1b/ff47cc237fd102a141cf3f77d83da0f60f3584
+  .git/objects/20/95125d75631f0778cbbc4ea9738bffb4f96185
+  .git/objects/22/03121aabd6ea29ca8f226fe4af8efe58e8d3bb
+  .git/objects/24/1b5912b64fceee9d370e2e397b140cd8aa7641
+  .git/objects/29/0da29b4bb3911e695d9130eb13b80b4eab4ecb
+  .git/objects/31/1ea8ab32764b3cb38bb6cf107e5cdf2f91bbc3
+  .git/objects/31/36c9d8598dee952736e69d82af810686d95ca0
+  .git/objects/31/efd485ee21becd6a6155b6579e6aac5e8caddb
+  .git/objects/35/2ef93a86d1ad88977b68e3cb2705887dbd782d
+  .git/objects/3b/e6178200f4b4fddcddaa617fd2eea77e147a44
+  .git/objects/41/528aada60e2eb30e9bde79f1d8887b7f0678e4
+  .git/objects/46/30c8ae190cf90bd52a84716a06fc42fa218429
+  .git/objects/48/31d327ab9812fa83114ae38f263adaa4c191c8
+  .git/objects/48/b7bb968d08edd95376dd5f0b1e4316e2570e69
+  .git/objects/4b/0107cc459dfb71ac02bfbe9fe9a42a737ab6c6
+  .git/objects/4f/e6e68ebb8bbb8cfe2d2dbe51b3b90e3a1cd88d
+  .git/objects/50/443c04b7402f4231e69e4f42a6d074ce4d7f07
+  .git/objects/50/6be45130d2e583e9864f416be169f7a8976cf7
+  .git/objects/54/c2bd4482e78eaaecd2e249eec863a00be3886a
+  .git/objects/55/6354e2b97426b22c392a401ad7038b42c5a76d
+  .git/objects/58/aae0e8dd46581909517624991ef6e828e14730
+  .git/objects/59/8ddb419b45a5cee19366dfdf993e7029ca8a78
+  .git/objects/59/e02760a7be6f74d556f700a31c1051ddc76705
+  .git/objects/5b/6a0652566d10360493952aec6d4a4febc77083
+  .git/objects/5b/78afe06c400f6c79c61acb43c214987124b90f
+  .git/objects/5d/c41b5e4c809bb7f6bd32ac1c67a7fa8191ec31
+  .git/objects/62/540002917c199c0726669facdbe1d35d0bbe25
+  .git/objects/64/041da9f3dde89e43d3fb023fbf326bbb841bea
+  .git/objects/64/5d15752bf110dc78a11706a41dbf3b624093ba
+  .git/objects/65/0ecab45f4885cc1b4a7937ff6c6fa08941c9b6
+  .git/objects/65/723c6341e78241534cd3e61acc22cef69fd487
+  .git/objects/67/3b909d9124d9a327b167e810f1ef7a4a79e315
+  .git/objects/67/82d02e2e9830be7d4ca23881839c5b61e20c97
+  .git/objects/68/c37a764dce019c0d33121e3a0ed54513e9873b
+  .git/objects/6e/658338a44b1197101ada50478cb21501a2c76d
+  .git/objects/73/256b307e1b70f305bece7bdec2752c664e5cf9
+  .git/objects/73/cd3b3c2833b6286d6dc845c67570669c5626d9
+  .git/objects/74/838a4a37010874bce8e59333207835eb14ef98
+  .git/objects/74/c0024c5066de44e928d9ece0eaee092474d58a
+  .git/objects/7c/289a6b741b49294d0511858e1a22bf24fbfcb7
+  .git/objects/7f/9f33ddd2c371a59988ec1e5d78205751164f12
+  .git/objects/87/018516de1676533e3341a9e48a434d2e1f6e71
+  .git/objects/88/fa63b2d042b14487b316d9eefda9de9a71a27b
+  .git/objects/89/62e8ab340343f27603f0694b6e8badbdaf28b0
+  .git/objects/8a/a912993719097a7d8c8c76a01b446228166638
+  .git/objects/8f/d3c594d892a5a39b9094a166dd3294a84038cd
+  .git/objects/91/114bf2f2bba5e0c5252e75018da19b869776f1
+  .git/objects/96/43cb68ca0bcbcf4063dcbc0212c3c644946d39
+  .git/objects/9b/01bbcbf90b98b3cedbb1113bc2c37c86cd4667
+  .git/objects/9b/21c3588e6f550091e7590e6e6aada392b6afb4
+  .git/objects/9b/5e47b9eeb448868217dda236f4f81ea625804e
+  .git/objects/9f/7fc69cb3454a74d8df64cdc6a4adc907eea12b
+  .git/objects/a0/c408b9cd93453f7fc1bc65cc0ff3a5b41746d9
+  .git/objects/a5/71b06ebc269f20a10ad2680f4fa7e54cad137e
+  .git/objects/a8/428dacf31d219742a7732a4a364879513faad2
+  .git/objects/ae/2bb8a3bd002b96ac671a175d2265ac0fa2e513
+  .git/objects/b6/a5fc683a8428daffa66b5f5b954db03387688b
+  .git/objects/b7/7f88c81b0dbced21224b796a1c3a474da6f7fb
+  .git/objects/ba/373dc158a56c5afb60f6a2ab38c8da1f7e35a6
+  .git/objects/ba/8f720668a8f8a9a8979717384c6a549afc8cfe
+  .git/objects/ba/a679882ea58d985b818e0c82decf45a21a2779
+  .git/objects/bd/a31532520fad2556855e1f6651675a47efcae6
+  .git/objects/c6/fc538b8c15d3050230b647f131abede1b72c8a
+  .git/objects/cd/32bab01fc0bb4c1cf2e6952ff4c91b6de9e0e7
+  .git/objects/d7/bfa47a93a4340e33d6b449f473e3eeac6fce14
+  .git/objects/da/4351010cac41bd9ef00bdb9e33eb7c33640c5e
+  .git/objects/de/d418e464da382124c5560b8ee0d42383719fdf
+  .git/objects/e3/5753492df770a5a61c048fca823e12ccf40698
+  .git/objects/e6/f73f26f1f7f3f30021de66fad30a572c2623fb
+  .git/objects/e8/9ec7f762eafe3083e8185a889b9fb52e7a8efd
+  .git/objects/e9/d27cb9a11404234f2c0b5edff4f41024dbf028
+  .git/objects/ea/9e01f59a28dad260af0b1358066402c1ad2d0c
+  .git/objects/ee/833c8a10c1b629c1fd42ea3866bab0783aceee
+  .git/objects/ef/1af8aa99116e81d34d2f3d3756f43ca6d3f456
+  .git/objects/f0/d61875e95f0b39c01b07500a77adbaf7b46e7a
+  .git/objects/f4/ac3b748284d54ce5043a72bdb0009a46312e8b
+  .git/objects/f8/294a90b4c932a7974242463987548583f1f438
+  .git/objects/f8/cd5b3e3330cac73b93039373600e4c1b92a36d
+  .git/objects/fd/56363f5ee3ed75048e783f5096441642433dc6
+Source packages should not contain undeclared executable files.
+See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .RData
+  .Rhistory
+  .git/.COMMIT_EDITMSG.swp
+  .gitignore
+  ..Rcheck
+  .Rd2pdf60055
+  .Rd2pdf60084
+  .Rd2pdf70324
+  .Rproj.user
+  .git
+These were most likely included in error. See section ‘Package
+structure’ in the ‘Writing R Extensions’ manual.
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘MLAT’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... NOTE
+Checking should be performed on sources prepared by ‘R CMD build’.
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... WARNING
+Found the following directory with the name of a check directory:
+  ./..Rcheck
+Most likely, these were included erroneously.
+Found the following directories with names of Rd2pdf directories:
+  ./.Rd2pdf60055
+  ./.Rd2pdf60084
+  ./.Rd2pdf70324
+Most likely, these were included erroneously.
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+ExplainedVarianceScore: no visible global function definition for ‘var’
+GetData: no visible global function definition for ‘data’
+MLP_classification: no visible global function definition for ‘predict’
+MLP_regression: no visible global function definition for ‘predict’
+MedianAbsoluteError: no visible global function definition for ‘median’
+MultiLogLoss: no visible global function definition for ‘model.matrix’
+RunTests: no visible binding for global variable ‘algoName’
+linear_regression: no visible global function definition for ‘lm’
+linear_regression: no visible global function definition for ‘predict’
+ridge_regression: no visible global function definition for ‘predict’
+svm_linear: no visible global function definition for ‘predict’
+svm_poli: no visible global function definition for ‘predict’
+svm_radial: no visible global function definition for ‘predict’
+Undefined global functions or variables:
+  algoName data lm median model.matrix predict var
+Consider adding
+  importFrom("stats", "lm", "median", "model.matrix", "predict", "var")
+  importFrom("utils", "data")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented data sets:
+  ‘AutoSweden’ ‘DNA’ ‘Glass’ ‘Housing’ ‘Ionosphere’ ‘Iris’
+  ‘LetterRecognition’ ‘PimaIndiansDiabetes’ ‘Shuttle’ ‘Sonar’ ‘Vehicle’
+  ‘Vowel’
+All user-level objects in a package should have documentation entries.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking data for ASCII and uncompressed saves ... WARNING
+  
+  Note: significantly better compression could be obtained
+        by using R CMD build --resave-data
+                          old_size new_size compress
+  DNA.rda                    124Kb     79Kb       xz
+  Housing.rda                 15Kb     12Kb       xz
+  Ionosphere.rda              42Kb     34Kb       xz
+  LetterRecognition.rda      267Kb    157Kb       xz
+  PimaIndiansDiabetes.rda     13Kb      8Kb       xz
+  Shuttle.rda                692Kb    363Kb       xz
+  Sonar.rda                   34Kb     26Kb       xz
+  Vehicle.rda                 25Kb     15Kb       xz
+  Vowel.rda                   25Kb     18Kb       xz
+* checking examples ... OK
+* checking PDF version of manual ... OK
+* DONE
+Status: 4 WARNINGs, 3 NOTEs

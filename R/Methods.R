@@ -34,6 +34,7 @@ linear_regression <- function(X_train, Y_train, X_test){
 #' @param X_train A Matrix of trainning observations.
 #' @param Y_train A numeric vector of classes or values of the trainning observations.
 #' @param X_test A Matrix of testing observations.
+#' @param lambda The penalty parameter.
 #' @return predicted values
 #' @examples
 #' X <- as.matrix(cbind(runif(n = 100), runif(n = 100)))
@@ -61,6 +62,9 @@ ridge_regression <- function(X_train, Y_train, X_test, lambda){
 #' @param X_train A Matrix of trainning observations.
 #' @param Y_train A numeric vector of classes or values of the trainning observations.
 #' @param X_test A Matrix of testing observations.
+#' @param n_neurons Number of neurons in the hidden layer.
+#' @param weight_decay Weigth decay parameter for neural network.
+#' @param max_iter Maximun number of trainning iterations.
 #' @return predicted values
 #' @examples
 #' X <- as.matrix(cbind(runif(n = 100), runif(n = 100)))
@@ -218,8 +222,13 @@ svm_radial <- function(X_train, Y_train, X_test,
 #' @param X_train A Matrix of trainning observations.
 #' @param Y_train  A numeric vector of classes or values of the trainning observations
 #' @param X_test A Matrix of testing observations.
+#' @param n_neurons Number of neurons in the hidden layer.
+#' @param weight_decay Weigth decay parameter for neural network.
+#' @param max_iter Maximun number of trainning iterations.
 #' @return predicted values
 #' @examples
+#' X <- as.matrix(cbind(runif(n = 100), runif(n = 100)))
+#' pos <- sample(100, 70)
 #' X_train <- X[pos, ]
 #' X_test <- X[-pos, ]
 #' Y_train <- as.numeric( X_train[, 1] ** 2 - X_train[, 2] > 0)

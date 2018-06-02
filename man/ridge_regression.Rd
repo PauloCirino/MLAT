@@ -12,6 +12,8 @@ ridge_regression(X_train, Y_train, X_test, lambda)
 \item{Y_train}{A numeric vector of classes or values of the trainning observations.}
 
 \item{X_test}{A Matrix of testing observations.}
+
+\item{lambda}{The penalty parameter.}
 }
 \value{
 predicted values

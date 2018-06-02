@@ -7,7 +7,7 @@
 GetMetrics(task)
 }
 \arguments{
-\item{A}{valid task, can be 'MultClass' or 'BinClass'.}
+\item{task}{A character string vector, cointaning 'MultClass' or/and 'BinClass' and/or 'Regression'.}
 }
 \value{
 All metrics names for that taks
@@ -16,5 +16,7 @@ All metrics names for that taks
 Get all possible task names
 }
 \examples{
-GetPossibleTasks()
+GetMetrics(task = 'MultClass')
+GetMetrics(task = 'BinClass')
+GetMetrics(task = 'Regression')
 }
