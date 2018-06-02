@@ -13,6 +13,8 @@ LazyData: false
 RoxygenNote: 6.0.1
 Imports:
     e1071,
-    class
+    class,
+    nnet,
+    ridge
 Suggests:
   ggplot2

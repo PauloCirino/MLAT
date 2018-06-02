@@ -13,7 +13,7 @@ CreateAlgo(algoName, algoFun, task, paramList)
 
 \item{task}{A character string vector, cointaning 'MultClass' or/and 'BinClass' and/or 'Regression'.}
 
-\item{paramList}{A list of all parameters and their values to be tested.}
+\item{paramList}{A list of all parameters and their values to be tested, NULL if none.}
 }
 \value{
 An object of class algorithm.

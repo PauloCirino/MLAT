@@ -1,0 +1,55 @@
+#' Elastic Net Regression
+#' @description  Performs a elastic net regression, wich is a combination of L1 and L2 penalties.
+#' @export
+#' @import elasticnet
+#' @param X_train A Matrix of trainning observations.
+#' @param Y_train A numeric vector of classes or values of the trainning observations.
+#' @param X_test A Matrix of testing observations.
+#' @return predicted values
+#' @examples
+#' X <- as.matrix(cbind(runif(n = 100), runif(n = 100)))
+#' Y <- 3*X[, 1] - 2.5*X[, 2] + 0.2 * runif(100)
+#' pos <- sample(100, 70)
+#' X_train <- X[pos, ]
+#' X_test <- X[-pos, ]
+#' Y_train <- Y[pos]
+#' Y_test <- Y[-pos]
+#' lambda <- 0.25
+#' Y_predicted <- elastic_net(X_train = X_train, Y_train = Y_train, X_test = X_test, lambda = lambda)
+#' plot(x = (1:100)[-pos], y = Y_test, col = 'red')
+#' points(x = (1:100)[-pos], y = Y_predicted, col = 'blue')
+elastic_net <- function(X_train, Y_train, X_test, lambda, max_steps = 200){
+  model <- elasticnet::enet(x = X_train, y = Y_train, lambda = lambda, max.steps = max_steps)
+  Y_hat <- as.numeric( predict.elnet(model, X_test, type="fit")
+  Y_hat
+}
+
+
+
+
+#' Mean Square Log Error
+#' @export
+#' @description Returns the coefficient of variation of the root mean square error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredLogError(Y = Y, Y_hat = Y_hat)
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+MeanSquaredLogError <- function(Y, Y_hat){
+  MSLE <- mean( (log(1 + Y) - log(1 + Y_hat))**2 )
+  if( is.nan(MSLE) ){
+    print('passei')
+  }
+  MSLE
+}

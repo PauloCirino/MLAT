@@ -5,6 +5,8 @@
 #' @return A character string vector with all possible datasets names.
 #' @examples
 #' GetDataSetsNames(task = 'MultClass')
+#' GetDataSetsNames(task = 'BinClass')
+#' GetDataSetsNames(task = 'Regression')
 GetDataSetsNames <- function(task){
   possibleTasks <- NULL
 
@@ -19,17 +21,20 @@ GetDataSetsNames <- function(task){
                        "Sonar",
                        "Vehicle",
                        "Vowel")
+    return(possibleTasks)
   }
 
   if(task == 'BinClass'){
   possibleTasks <- c('Ionosphere',
                      'PimaIndiansDiabetes',
                      'Sonar')
+  return(possibleTasks)
   }
 
   if(task == 'Regression'){
     possibleTasks <- c('Housing',
                        'AutoSweden')
+    return(possibleTasks)
   }
 
   stop('Invalid task !!!')
@@ -126,8 +131,8 @@ GetData <- function(datasetName, seed, splitPerc){
 
   pos <- sample(Data$nRows, round(Data$nRows * splitPerc))
   Data <- append(Data,
-                 list(X_train = Data$X[pos, ],
-                      X_test = Data$X[-pos, ],
+                 list(X_train = as.matrix(Data$X[pos, ]),
+                      X_test = as.matrix(Data$X[-pos, ]),
                       Y_train = Data$Y[pos],
                       Y_test = Data$Y[-pos] ))
   class(Data) <- append(class(Data), 'trainTestDataSet')

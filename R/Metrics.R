@@ -311,3 +311,307 @@ MultClassMetrics <- function(Y, Y_hat,
   class(resultList) <- append(class(resultList), 'multiClassResultList')
   resultList
 }
+
+#' Regression Metrics
+#' @export
+#' @description Returns a character string vector containning all regression metrics.
+#' @return character string vector with all possible regression metrics.
+#' @examples
+#' RegressionMetricsNames()
+RegressionMetricsNames <- function(){
+  metricsNames <- c('R2',
+                    'Explained Variance Score',
+                    'Mean Error',
+                    'Mean Absolute Error',
+                    'Mean Squared Error',
+                    'Root Mean Squared Error',
+                    'Normalized Root Mean Squared Error',
+                    'Coefficient of Variation Root Mean Squared Error',
+                    'Median Absolute Erro')
+  metricsNames
+}
+
+#' Coefficient of Determination - R2
+#' @export
+#' @description Returns the Coefficient of determination R2 score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+R2 <- function(Y, Y_hat){
+  R2_score <- 1 - ( sum((Y - Y_hat)**2)  / sum((Y - mean(Y))**2) )
+  R2_score
+}
+
+#' Explained Variance Score
+#' @export
+#' @description Returns the explained variance score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+ExplainedVarianceScore <- function(Y, Y_hat){
+  EVS <- 1 - ( var(Y - Y_hat) / var(Y) )
+  EVS
+}
+
+#' Mean Error
+#' @export
+#' @description Returns the mean error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+MeanError <- function(Y, Y_hat){
+  ME <- mean(Y-Y_hat)
+  ME
+}
+
+#' Mean Absolute Error
+#' @export
+#' @description Returns the mean absolute error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+MeanAbsoluteError <- function(Y, Y_hat){
+  MAE <- mean(abs(Y-Y_hat))
+  MAE
+}
+
+#' Mean Square Error
+#' @export
+#' @description Returns the mean square error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+MeanSquaredError <- function(Y, Y_hat){
+  MSE <- mean( (Y-Y_hat)**2 )
+  MSE
+}
+
+#' Root Mean Square Error
+#' @export
+#' @description Returns the root mean square error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+RootMeanSquaredError <- function(Y, Y_hat){
+  RMSE <- mean( sqrt((Y-Y_hat)**2) )
+  RMSE
+}
+
+#' Normalized Root Mean Square Error
+#' @export
+#' @description Returns the normalized root mean square error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+NormalizedRootMeanSquaredError <- function(Y, Y_hat){
+  NRMSE <- mean( sqrt((Y-Y_hat)**2) ) / (max(Y) - min(Y))
+  NRMSE
+}
+
+
+#' Coefficient of Variation Root Mean Square Error
+#' @export
+#' @description Returns the coefficient of variation of the root mean square error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+CoefficientVariationRootMeanSquaredError <- function(Y, Y_hat){
+  CVRMSE <- mean( sqrt((Y-Y_hat)**2) ) / (mean(Y))
+  CVRMSE
+}
+
+#' Median Absolute Error
+#' @export
+#' @description Returns the median absolute error score for regression.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @return A numeric values.
+#' @examples
+#' Y <- runif(100)
+#' Y_hat <- Y + 0.2*runif(100)
+#' R2(Y = Y, Y_hat = Y_hat)
+#' ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+#' MeanError(Y = Y, Y_hat = Y_hat)
+#' MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+#' MeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+#' CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+
+#' MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+MedianAbsoluteError <- function(Y, Y_hat){
+  MedianAE <- median( abs(Y - Y_hat) )
+  MedianAE
+}
+
+
+#' Regression Metrics
+#' @export
+#' @description Returns a regResultList with regression metrics.
+#' @param Y Ground truth numeric vector.
+#' @param Y_hat Predicted values numeric vector.
+#' @param MetricsNames Metrics names, avilable can be found with RegressionMetricsNames() .
+#' @return A regResultList with results
+#' @examples
+#' Y = runif(100)
+#' Y_hat = Y + 0.5*runif(100)
+#' RegMetrics(Y = Y, Y_hat = Y_hat, MetricsNames = RegressionMetricsNames())
+RegMetrics <- function(Y, Y_hat,
+                             MetricsNames){
+
+  resultList <- list()
+  if(length(Y) != length(Y_hat)){
+    stop('Y and Y_hat have different sizes!!!')
+  }
+
+  if( any( (MetricsNames %in% RegressionMetricsNames()) == FALSE) ){
+    stop('Invalid values for MetricsNames !!!')
+  }
+
+  if("R2" %in% MetricsNames){
+    resultList[["R2"]]  <- R2(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Explained Variance Score" %in% MetricsNames){
+    resultList[["Explained Variance"]]  <- ExplainedVarianceScore(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Mean Error" %in% MetricsNames){
+    resultList[["Mean Error"]]  <- MeanError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Mean Absolute Error" %in% MetricsNames){
+    resultList[["Mean Absolute Error"]]  <- MeanAbsoluteError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Mean Squared Error" %in% MetricsNames){
+    resultList[["Mean Squared Error"]]  <- MeanSquaredError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Root Mean Squared Error" %in% MetricsNames){
+    resultList[["Root Mean Squared Error"]]  <- RootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Normalized Root Mean Squared Error" %in% MetricsNames){
+    resultList[["Normalized Root Mean Squared Error"]]  <- NormalizedRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Coefficient of Variation Root Mean Squared Error" %in% MetricsNames){
+    resultList[["Coefficient of Variation Root Mean Squared Error"]]  <- CoefficientVariationRootMeanSquaredError(Y = Y, Y_hat = Y_hat)
+  }
+
+  if("Median Absolute Erro" %in% MetricsNames){
+    resultList[["Median Absolute Error"]]  <- MedianAbsoluteError(Y = Y, Y_hat = Y_hat)
+  }
+  class(resultList) <- append(class(resultList), 'multiClassResultList')
+  resultList
+}
+
+
+
+
+

@@ -17,4 +17,6 @@ Get all available datasets names
 }
 \examples{
 GetDataSetsNames(task = 'MultClass')
+GetDataSetsNames(task = 'BinClass')
+GetDataSetsNames(task = 'Regression')
 }

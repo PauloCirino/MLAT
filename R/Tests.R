@@ -41,8 +41,14 @@ EvaluateResults <- function(Y, Y_hat,
                            MetricsNames = metrics))
   }
 
-  stop('An unexpected error has occurred !!!!')
+  if(task == 'Regression'){
+    return(RegMetrics(Y = Y,
+                      Y_hat = Y_hat,
+                      MetricsNames = metrics))
   }
+
+  stop('An unexpected error has occurred !!!!')
+}
 
 ## NO EXPORT
 GetFuncCall <- function(paramNames){
@@ -75,54 +81,78 @@ RunSingleTest <- function(testFunc,
                           nTestsPerParam,
                           splitPerc,
                           verbose = TRUE){
-  nParams <- length(paramList)
-  paramNames <- NA
-  if(nParams > 0){
+  if(is.null(paramList)){
+    paramNames <- NULL
+    nParams <- 0
+    paramList <- list(dataSetName    = dataSetNames,
+                      seed           = 1:nTestsPerParam,
+                      splitPerc      = splitPerc)
+  } else{
+    nParams <- length(paramList)
     paramNames <- names(paramList)
+    paramList <- append(paramList,
+                        list( dataSetName    = dataSetNames,
+                              seed           = 1:nTestsPerParam,
+                              splitPerc      = splitPerc) )
   }
-  nMetrics <- length(metrics)
 
-  paramList <- append(paramList,
-                      list(dataSetName    = dataSetNames,
-                           seed             = 1:nTestsPerParam,
-                           splitPerc       = splitPerc))
+  nMetrics <- length(metrics)
   paramTable <- expand.grid(paramList)
   nTotalTests <- nrow(paramTable)
 
   globalResultTable <- as.data.frame( matrix(nrow = nTotalTests,
                                              ncol = nMetrics) )
   colnames(globalResultTable) <- metrics
+  error_tests_pos <- numeric()
   for(i in 1:nTotalTests){
     if(verbose){
       cat('Running test', i, '/', nTotalTests,
           'at', as.character(Sys.time()), '\n')
     }
+
     params <- paramTable[i, ] ### params for the iter
     iterData <- GetData(datasetName = params$dataSetName,  ### data for the iter
                         seed = params$seed,
                         splitPerc = params$splitPerc)
 
     funcCall <- GetFuncCall(paramNames = paramNames) ### func text
-    Y_hat <- eval(expr = funcCall ) ### runs the func with params values
-    iter_results <- EvaluateResults(Y = iterData$Y_test,
-                                    Y_hat = Y_hat,
-                                    task = task,
-                                    metrics = metrics)
+    Y_hat <- try( expr = eval(expr = funcCall ), silent = TRUE) ### runs the func with params values
+    if(class(Y_hat) == "try-error"){
+      cat('Error at :', params$dataSetName, 'dataset' , '\n')
+      error_tests_pos <- append(error_tests_pos, i)
+    } else{
+      iter_results <- EvaluateResults(Y = iterData$Y_test,
+                                      Y_hat = Y_hat,
+                                      task = task,
+                                      metrics = metrics)
 
-    globalResultTable[i, ] <- as.numeric( iter_results )
+      globalResultTable[i, ] <- as.numeric( iter_results )
+    }
   }
+
+  if(length(error_tests_pos) == nTotalTests){
+    cat('All Errors in this call !!!\n')
+    return(NULL)
+  }
+
+  if(length(error_tests_pos) > 0){
+    globalResultTable <- globalResultTable[-error_tests_pos, ]
+  }
+
   colnames(globalResultTable) <- metrics
   globalResultTable <- cbind(paramTable[, ((nParams+1):ncol(paramTable))],
                              globalResultTable)
-  if(nParams > 0){
+  if(nParams == 0){
+    paramID <- NA
+  } else if(nParams > 0){
     paramID <- paste(paramNames[1], '=', paramTable[, 1])
     j <- 2
     while(j < nParams){
       paramID <- paste(paramID, ' - ', paramNames[j], '=', paramTable[, j], sep = '')
       j <- j + 1
     }
-    globalResultTable <- cbind(paramID = paramID, globalResultTable)
   }
+  globalResultTable <- cbind(paramID = paramID, globalResultTable)
   globalResultTable
 }
 
@@ -144,6 +174,13 @@ RunSingleTest <- function(testFunc,
 #' myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
 #'                      task = 'MultClass',
 #'                      dataSetNames = c('Iris', 'PimaIndiansDiabetes'))
+#'
+#'cmpTestsFuncsList <- GetAllRegressionAlgo()
+#'task <- 'Regression'
+#'dataSetNames <- GetDataSetsNames(task = task)
+#'myResult <- RunTests(cmpTestsFuncsList = cmpTestsFuncsList,
+#'                     task = task,
+#'                     dataSetNames = dataSetNames)
 RunTests <- function(cmpTestsFuncsList = cmpTestsFuncsList,
                      task = task,
                      dataSetNames = dataSetNames,
@@ -156,7 +193,7 @@ RunTests <- function(cmpTestsFuncsList = cmpTestsFuncsList,
     stop('splitPerc must be between 0 and 1!!! Default = 0.7')
   }
 
-  if(is.na(metrics)){
+  if(anyNA(metrics)){
     metrics <- GetMetrics(task = task)
   }
 
@@ -173,9 +210,12 @@ RunTests <- function(cmpTestsFuncsList = cmpTestsFuncsList,
                                 nTestsPerParam = nTestsPerParam,
                                 splitPerc      = splitPerc,
                                 verbose        = verbose)
-    print(iterResult)
-    globalResult <- rbind(globalResult,
-                          cbind(algorithm = algoInfo$algoName, iterResult))
+    if(is.null(iterResult)){
+      cat('All Errors at ', algoName, '!!!\n')
+    } else{
+      globalResult <- rbind(globalResult,
+                            cbind(algorithm = algoInfo$algoName, iterResult))
+    }
   }
   globalResult
 }

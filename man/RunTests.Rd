@@ -36,4 +36,11 @@ dataSetNames <- c('Iris', 'PimaIndiansDiabetes')
 myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
                      task = 'MultClass',
                      dataSetNames = c('Iris', 'PimaIndiansDiabetes'))
+
+cmpTestsFuncsList <- GetAllRegressionAlgo()
+task <- 'Regression'
+dataSetNames <- GetDataSetsNames(task = task)
+myResult <- RunTests(cmpTestsFuncsList = cmpTestsFuncsList,
+                    task = task,
+                    dataSetNames = dataSetNames)
 }
