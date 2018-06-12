@@ -5,5 +5,6 @@ citEntry(entry = "manual",
   title = "MLAT: Machine Learning Automated Software",
   year = "2018",
   note = "R package version 0.1.0",
-  textVersion = "P. C. Ribeiro Neto. MLAT: Machine Learning Automated Software. 2018"
+  textVersion = "P. C. Ribeiro Neto. MLAT: Machine Learning Automated Software. 2018",
+  url = "https://github.com/PauloCirino/MLAT"
 )

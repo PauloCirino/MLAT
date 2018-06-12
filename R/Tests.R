@@ -72,7 +72,9 @@ GetFuncCall <- function(paramNames){
   funcCall
 }
 
-## NO EXPORT
+#' Run Single Test
+#' @description Runs single test
+#' @export
 RunSingleTest <- function(testFunc,
                           paramList,
                           task,
@@ -217,5 +219,7 @@ RunTests <- function(cmpTestsFuncsList = cmpTestsFuncsList,
                             cbind(algorithm = algoInfo$algoName, iterResult))
     }
   }
+
+  class(globalResult) <- append(class(globalResult), 'testResultTable')
   globalResult
 }
