@@ -1,7 +1,6 @@
 #' Reduce Results
 #' @description Reduce Results
 #' @import dplyr
-#' @export
 #' @description Reduces result table by parameter
 #' @param resultTable Table resulted from a MLAT::RunTests() call
 #' @param reductionMetric A decision metric, must have been selected in MLAT::RunTests() function call.
@@ -94,21 +93,26 @@ ReduceResults <- function(resultTable,
   resultTable
 }
 
-cmpTestsFuncsList <- GetAllMultClassAlgo()
-task <- 'MultClass'
-dataSetNames <- c('Iris', 'PimaIndiansDiabetes')
-myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
-                      task = 'MultClass',
-                      dataSetNames = c('Iris', 'PimaIndiansDiabetes'))
-testingMetric <- 'Accuracy Micro'
-
-
-resultTable <-myResult
-method = 'friedman'
-reductionMethod = 'mean'
-reductionOrder = 'max'
-alpha = 0.05
-
+#' Reduce Results
+#' @description Reduce Results
+#' @import dplyr
+#' @import tidyr
+#' @import scmamp
+#' @description Performs Statistical Tests
+#' @param resultTable Table resulted from a MLAT::RunTests() call
+#' @param testingMetric A decision metric, must have been selected in MLAT::RunTests() function call.
+#' @param reductionMethod A reduction method, can be 'mean' or 'median'.
+#' @param reductionOrder The reduction Order of selected values, max or min.
+#' @param alpha Test significance level.
+#' @return A list of type hypotesesTest.
+#' @examples
+#' cmpTestsFuncsList <- GetAllMultClassAlgo()
+#' task <- 'MultClass'
+#' dataSetNames <- MLAT::GetDataSetsNames(task = task)
+#' myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
+#'                      task = 'MultClass',
+#'                      dataSetNames = dataSetNames)
+#'
 hypotessesTesting <- function(resultTable,
                               testingMetric,
                               method = 'friedman',
@@ -219,7 +223,7 @@ anovaTest <- function(reducedTable,
 
   pdf(NULL)
   dev.off()
-  dev.control(displaylist = "enable")
+  try(dev.control(displaylist = "enable"), silent = TRUE)
   plot(Tukey)
   image <- recordPlot()
   invisible(dev.off())
