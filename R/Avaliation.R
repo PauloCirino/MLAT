@@ -42,6 +42,8 @@ ReduceResults <- function(resultTable,
     stop('resultTable of wrong type !!!')
   }
 
+  originalColnames <- colnames(myResult)
+
   auxTable <- resultTable %>%
     dplyr::select(algorithm, paramID, reductionMetric, dataSetName)
 
@@ -86,7 +88,183 @@ ReduceResults <- function(resultTable,
     dplyr::inner_join(auxTable) %>%
     data.frame()
 
+  colnames(resultTable) <- originalColnames
+
   class(resultTable) <- append(class(resultTable), 'testResultTable')
   resultTable
 }
 
+cmpTestsFuncsList <- GetAllMultClassAlgo()
+task <- 'MultClass'
+dataSetNames <- c('Iris', 'PimaIndiansDiabetes')
+myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
+                      task = 'MultClass',
+                      dataSetNames = c('Iris', 'PimaIndiansDiabetes'))
+testingMetric <- 'Accuracy Micro'
+
+
+resultTable <-myResult
+method = 'friedman'
+reductionMethod = 'mean'
+reductionOrder = 'max'
+alpha = 0.05
+
+hypotessesTesting <- function(resultTable,
+                              testingMetric,
+                              method = 'friedman',
+                              reductionMethod = 'mean',
+                              reductionOrder = 'max',
+                              alpha = 0.05){
+
+  if(! "testResultTable" %in% class(resultTable)){
+    stop('resultTable of wrong type !!!')
+  }
+
+  if(! reductionMethod %in% c('mean', 'median', 'min', 'max')){
+    stop('Wrong value for reductionMethod!!!\nValid options are mean or median !!!')
+  }
+
+  if(! reductionOrder %in% c('max', 'min')){
+    stop('Wrong value for reductionOrder!!!\nValid options are max or min !!!')
+  }
+
+  if(! testingMetric %in% colnames(resultTable)){
+    stop('resultTable of wrong type !!!')
+  }
+
+  if(! method %in% c('anova', 'friedman')){
+    stop('Invalid value for method !!!')
+  }
+
+  originalColnames <- colnames(resultTable)
+
+  auxTable <- resultTable %>%
+    dplyr::select(algorithm, paramID, testingMetric, dataSetName)
+
+  columnNames <- colnames(auxTable)
+  columnNames[columnNames == testingMetric] <- 'testingMetric'
+  colnames(auxTable) <- columnNames
+
+
+  auxTable <- auxTable %>%
+    dplyr::group_by(algorithm, paramID, dataSetName)
+
+  ## Reduz por parametro
+  if(reductionMethod == 'mean'){
+    auxTable <- auxTable %>%
+      dplyr::summarise(reducedValue = min(testingMetric))
+  }else if(reductionMethod == 'median'){
+    auxTable <- auxTable %>%
+      dplyr::summarise_all(reducedValue = median(testingMetric))
+  }else if(reductionMethod == 'max'){
+    auxTable <- auxTable %>%
+      dplyr::summarise_all(reducedValue = max(testingMetric))
+  } else if(reductionMethod == 'min'){
+    auxTable <- auxTable %>%
+      dplyr::summarise_all(reducedValue = min(testingMetric))
+  }
+  reducedTable <- auxTable %>% ungroup()
+
+  ## Filtra melhor parametro
+  auxTable <- reducedTable %>%
+    dplyr::group_by(algorithm, dataSetName)
+
+  if(reductionOrder == 'max'){
+    auxTable <- auxTable %>%
+      dplyr::arrange(-reducedValue)
+  } else if(reductionOrder == 'min'){
+    auxTable <- auxTable %>%
+      dplyr::arrange(reducedValue)
+  }
+
+  auxTable <- auxTable%>%
+    dplyr::slice(1) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(dataSetName, algorithm, paramID)
+
+  reducedTable <- reducedTable %>%
+    dplyr::inner_join(auxTable) %>%
+    dplyr::select(algorithm, reducedValue, dataSetName) %>%
+    tidyr::spread(algorithm, reducedValue)
+
+  testResult <- NULL
+  if(method == 'anova'){
+    testResult <- anovaTest(reducedTable, reductionOrder, alpha)
+  }else if(method == 'friedman'){
+    testResult <- friedmanTest(reducedTable, reductionOrder, alpha)
+  }
+
+  testResult
+}
+
+
+anovaTest <- function(reducedTable,
+                      reductionOrder,
+                      alpha){
+
+  reducedTable <- reducedTable %>%
+    dplyr::select(-dataSetName) %>%
+    as.data.frame()
+
+  pValueTable <- round( scmamp::tukeyPost(data = reducedTable), 4)
+  signDiffTable <- pValueTable < alpha
+
+  auxData <- reducedTable %>%
+    tidyr::gather(algorithm, metric) %>%
+    dplyr::mutate(algorithm = as.factor(algorithm)) %>%
+    as.data.frame()
+
+  ANOVA <- aov(metric ~ algorithm, data = auxData)
+  Tukey <- TukeyHSD(ANOVA, ordered = TRUE)
+
+  pdf(NULL)
+  dev.off()
+  dev.control(displaylist = "enable")
+  plot(Tukey)
+  image <- recordPlot()
+  invisible(dev.off())
+  plot.new()
+
+  resultTable <- list(image = image,
+                      pValueTable = pValueTable,
+                      signDiffTable = signDiffTable,
+                      test = 'anova',
+                      alpha = alpha)
+  class(resultTable) <- append(class(resultTable), 'hypotesesTest')
+  resultTable
+
+}
+
+
+friedmanTest <- function(reducedTable,
+                         reductionOrder,
+                         alpha){
+  if(reductionOrder == 'max'){
+    decreasing <- TRUE
+  } else{
+    decreasing <- FALSE
+  }
+
+  reducedTable <- reducedTable %>%
+                  dplyr::select(-dataSetName) %>%
+                  as.data.frame()
+
+  pdf(NULL)
+  dev.off()
+  try(dev.control(displaylist = "enable"), silent = TRUE)
+  plotCD(reducedTable, alpha = alpha, decreasing = decreasing)
+  image <- recordPlot()
+  invisible(dev.off())
+  plot.new()
+
+  pValueTable <- round( scmamp::friedmanPost(data = reducedTable), 4)
+  signDiffTable <- pValueTable < alpha
+
+  resultTable <- list(image = image,
+                      pValueTable = pValueTable,
+                      signDiffTable = signDiffTable,
+                      test = 'friedman',
+                      alpha = alpha)
+  class(resultTable) <- append(class(resultTable), 'hypotesesTest')
+  resultTable
+}

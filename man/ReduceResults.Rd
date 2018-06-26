@@ -37,4 +37,5 @@ reducedTable <- ReduceResults(resultTable = myResult,
                              reductionOrder = 'max' )
 
 
+
 }
