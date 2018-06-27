@@ -93,11 +93,12 @@ ReduceResults <- function(resultTable,
   resultTable
 }
 
-#' Reduce Results
-#' @description Reduce Results
+#' Hypoteses Testing
+#' @description Hypoteses Testing
 #' @import dplyr
 #' @import tidyr
 #' @import scmamp
+#' @export
 #' @description Performs Statistical Tests
 #' @param resultTable Table resulted from a MLAT::RunTests() call
 #' @param testingMetric A decision metric, must have been selected in MLAT::RunTests() function call.
@@ -110,9 +111,14 @@ ReduceResults <- function(resultTable,
 #' task <- 'MultClass'
 #' dataSetNames <- MLAT::GetDataSetsNames(task = task)
 #' myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
-#'                      task = 'MultClass',
+#'                      task = task,
 #'                      dataSetNames = dataSetNames)
-#'
+#'hypotessesTesting(resultTable = myResult,
+#'                  testingMetric = 'F1 Macro',
+#'                  method = 'friedman',
+#'                  reductionMethod = 'mean',
+#'                  reductionOrder = 'max',
+#'                  alpha = 0.05)
 hypotessesTesting <- function(resultTable,
                               testingMetric,
                               method = 'friedman',
@@ -198,6 +204,7 @@ hypotessesTesting <- function(resultTable,
     testResult <- friedmanTest(reducedTable, reductionOrder, alpha)
   }
 
+  testResult[['reducedTable']] <- reducedTable %>% as.data.frame()
   testResult
 }
 

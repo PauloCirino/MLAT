@@ -2,7 +2,7 @@
 % Please edit documentation in R/Avaliation.R
 \name{hypotessesTesting}
 \alias{hypotessesTesting}
-\title{Reduce Results}
+\title{Hypoteses Testing}
 \usage{
 hypotessesTesting(resultTable, testingMetric, method = "friedman",
   reductionMethod = "mean", reductionOrder = "max", alpha = 0.05)
@@ -22,19 +22,21 @@ hypotessesTesting(resultTable, testingMetric, method = "friedman",
 A list of type hypotesesTest.
 }
 \description{
-Reduce Results
+Hypoteses Testing
 
 Performs Statistical Tests
 }
 \examples{
 cmpTestsFuncsList <- GetAllMultClassAlgo()
 task <- 'MultClass'
-dataSetNames <- c('Iris', 'PimaIndiansDiabetes')
+dataSetNames <- MLAT::GetDataSetsNames(task = task)
 myResult <- RunTests(cmpTestsFuncsList = GetAllMultClassAlgo(),
-                     task = 'MultClass',
-                     dataSetNames = c('Iris', 'PimaIndiansDiabetes'))
-reducedTable <- ReduceResults(resultTable = myResult,
-                             reductionMetric = 'Accuracy Macro',
-                             reductionMethod = 'mean',
-                             reductionOrder = 'max' )
+                     task = task,
+                     dataSetNames = dataSetNames)
+hypotessesTesting(resultTable = myResult,
+                 testingMetric = 'F1 Macro',
+                 method = 'friedman',
+                 reductionMethod = 'mean',
+                 reductionOrder = 'max',
+                 alpha = 0.05)
 }
